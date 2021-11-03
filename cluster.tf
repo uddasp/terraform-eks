@@ -7,8 +7,8 @@ data "aws_eks_cluster_auth" "eks" {
 }
 
 provider "aws" {
-  access_key = "AKIAZC3JPJURVFOKBI3O"
-  secret_key = "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"
+  access_key = "XXXX"
+  secret_key = "XXX"
   region  = "us-east-1"
 }
 
