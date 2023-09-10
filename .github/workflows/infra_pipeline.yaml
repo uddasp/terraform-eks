@@ -5,11 +5,39 @@ on:
     branches:
       - master
 
+env:
+  # component: "infra"
+  # stack: ${{ inputs.stack }}
+  # action: ${{ inputs.action }}
+  # product: "pingfed-console"
+  tf_dir: "./components/infra_tf/network"
+  # lint_dir: "./"
+  # tfvars_path: "./params/${{ inputs.stack }}/params.tfvars"
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.tf_dir }}
 
     steps:
+      - name: configure aws credentials ${{ inputs.stack }}
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install AWS CLI v2
+        run:  |
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
+              unzip -q /tmp/awscliv2.zip -d /tmp
+              rm /tmp/awscliv2.zip
+              sudo /tmp/aws/install --update
+              rm -rf /tmp/aws/
+              aws sts get-caller-identity
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -20,6 +48,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: ${{ env.tf_dir }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: ${{ env.tf_dir }}
