@@ -10,7 +10,7 @@ env:
   # stack: ${{ inputs.stack }}
   # action: ${{ inputs.action }}
   # product: "pingfed-console"
-  tf_dir: "./components/infra_tf/network"
+  tf_dir: "./infra_tf/network"
   # lint_dir: "./"
   # tfvars_path: "./params/${{ inputs.stack }}/params.tfvars"
 
