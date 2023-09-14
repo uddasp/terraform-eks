@@ -6,16 +6,10 @@ on:
       - master
 
 env:
-  # component: "infra"
-  # stack: ${{ inputs.stack }}
-  # action: ${{ inputs.action }}
-  # product: "pingfed-console"
   tf_dir: "./infra_tf/network"
-  # lint_dir: "./"
-  # tfvars_path: "./params/${{ inputs.stack }}/params.tfvars"
 
 jobs:
-  terraform:
+  network:
     runs-on: ubuntu-latest
     defaults:
       run:
