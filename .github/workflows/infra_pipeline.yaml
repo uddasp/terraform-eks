@@ -51,5 +51,5 @@ jobs:
         working-directory: ${{ env.tf_dir }}
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -destroy
         working-directory: ${{ env.tf_dir }}
